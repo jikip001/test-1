@@ -222,7 +222,7 @@ class Database{
 			$input = stripslashes($input);
 		}
 		$input = strip_tags($input);
-		$conoo = mysql_escape_string($input);
+		$conoo = mysqli_escape_string($input);
 		return $conoo;
 	}
 	
