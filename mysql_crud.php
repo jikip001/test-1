@@ -152,11 +152,11 @@ class Database{
                 $delete = 'DELETE FROM `'.$table.'` WHERE '.$where; // Create query to delete rows
             }
             // Submit query to database
-            if($del = @mysql_query($delete)){
-            	array_push($this->result,mysql_affected_rows($this->con));
+            if($del = @mysqli_query($this->con,$delete)){
+            	array_push($this->result,mysqli_affected_rows($this->con));
                 return true; // The query exectued correctly
             }else{
-            	array_push($this->result,mysql_error($this->con));
+            	array_push($this->result,mysqli_error($this->con));
                	return false; // The query did not execute correctly
             }
         }else{
@@ -178,10 +178,10 @@ class Database{
 			$sql='UPDATE `'.$table.'` SET '.implode(',',$args).' WHERE '.$where;
 			// Make query to database
             if($query = @mysqli_query($this->con,$sql)){
-            	array_push($this->result,mysql_affected_rows($this->con));
+            	array_push($this->result,mysqli_affected_rows($this->con));
             	return true; // Update has been successful
             }else{
-            	array_push($this->result,mysql_error($this->con));
+            	array_push($this->result,mysqli_error($this->con));
                 return false; // Update has not been successful
             }
         }else{
@@ -222,7 +222,7 @@ class Database{
 			$input = stripslashes($input);
 		}
 		$input = strip_tags($input);
-		$conoo = mysql_escape_string($input);
+		$conoo = mysqli_escape_string($this->con,$input);
 		return $conoo;
 	}
 	
