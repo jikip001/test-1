@@ -7,20 +7,20 @@
 class Status
 {
 
-	public function __construct($mysql){
-		$this->mysql = $mysql;
-		$this->mysql->connect();
+	public function __construct($mysqli){
+		$this->mysqli = $mysqli;
+		$this->mysqli->connect();
 	}
 
 	public function count_char() {
-		$this->mysql->select('char');
-		$res = $this->mysql->getNumrows();
+		$this->mysqli->select('char');
+		$res = $this->mysqli->getNumrows();
 		return $res;
 	}
 	
 	public function count_allid() {
-		$this->mysql->select('login');
-		$res = $this->mysql->getNumrows();
+		$this->mysqli->select('login');
+		$res = $this->mysqli->getNumrows();
 		return $res;
 	}
 	
@@ -32,14 +32,14 @@ class Status
 	}*/
 	
 	public function get_real_users() {
-		$this->mysql->select('char', 'online', null, 'online=1');
-		$real_users = $this->mysql->getNumrows();
+		$this->mysqli->select('char', 'online', null, 'online=1');
+		$real_users = $this->mysqli->getNumrows();
 		return $real_users;
 	}
 	
 	public function get_custom_users() {
-		$this->mysql->select('custom_users');
-		$res = $this->mysql->getResult();
+		$this->mysqli->select('custom_users');
+		$res = $this->mysqli->getResult();
 		return $res['users'];
 	}
 	
